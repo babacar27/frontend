@@ -1,0 +1,16 @@
+.owl-carousel .card {
+  margin: 0 15px;
+}
+
+.owl-carousel .card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.vegetable-carousel .card-body {
+  background-color: #f8f9fa;
+}
+
+.vegetable-carousel .btn {
+  padding: 0.375rem 1rem;
+}
