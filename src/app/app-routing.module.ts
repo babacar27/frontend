@@ -12,6 +12,18 @@ import { ResetPasswordComponent } from './components/auth/resetforgetPassword/re
 import { PageAccueilComponent } from './components/management/accueil/accueil-visiteur/page-accueil/page-accueil.component';
 import { BoutiqueComponent } from './components/management/boutique/boutique/boutique.component';
 import { ContactComponent } from './components/management/contact/contact/contact.component';
+import { AjoutCategorieComponent } from './components/management/pages/admin/categorie/ajout-categorie/ajout-categorie.component';
+import { ListeProduitComponent } from './components/management/pages/vendeur/produit/liste-produit/liste-produit.component';
+import { AjoutProduitComponent } from './components/management/pages/vendeur/produit/ajout-produit/ajout-produit.component';
+import { ListeProduitAdminComponent } from './components/management/pages/admin/produit/liste-produit-admin/liste-produit-admin.component';
+import { AjoutProduitAdminComponent } from './components/management/pages/admin/produit/ajout-produit-admin/ajout-produit-admin.component';
+import { ListeAnnoncesComponent } from './components/management/pages/admin/annonces/liste-annonces/liste-annonces.component';
+import { ListeUtilisateurComponent } from './components/management/pages/admin/utilisateur/liste-utilisateur/liste-utilisateur.component';
+import { AjoutAnnoncesComponent } from './components/management/pages/vendeur/annonces/ajout-annonces/ajout-annonces.component';
+import { MesAnnoncesComponent } from './components/management/pages/vendeur/annonces/mes-annonces/mes-annonces.component';
+import { ListeCommandeComponent } from './components/management/pages/admin/commande/liste-commande/liste-commande.component';
+import { MesCommandeComponent } from './components/management/pages/vendeur/commande/mes-commande/mes-commande.component';
+import { ProduitComponent } from './components/management/pages/client/produit/produit.component';
 
 const routes: Routes = [
 
@@ -51,6 +63,21 @@ const routes: Routes = [
   },
   {path: 'boutique', component: BoutiqueComponent},
   {path: 'contact', component: ContactComponent},
+  {path: 'AjoutCategorie', component: AjoutCategorieComponent},
+  {path: 'ListeProduit', component: ListeProduitAdminComponent},
+  {path: 'AjoutProduit', component: AjoutProduitAdminComponent},
+  {path: 'ListeAnnonces', component: ListeAnnoncesComponent},
+  {path: 'ListeUtilisateur', component: ListeUtilisateurComponent},
+
+
+
+  //routes des vendeurs
+  {path: 'MesAnnonces', component: MesAnnoncesComponent},
+  {path: 'AjoutAnnonces', component: AjoutAnnoncesComponent},
+  {path: 'MesCommande', component: MesCommandeComponent},
+  {path: 'boutiqueClient', component: ProduitComponent},
+
+
 
 
 

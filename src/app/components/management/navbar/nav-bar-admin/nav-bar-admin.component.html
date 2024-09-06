@@ -23,59 +23,57 @@
           <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
               <div class="navbar-nav mx-auto">
                   <a  class="nav-item nav-link ">Accueil</a>
-                  <a  class="nav-item nav-link ">Boutiques</a>
 
                   <div class="nav-item dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
                       <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                          <a  class="dropdown-item">Liste des Categories</a>
-                          <a  class="dropdown-item">Ajouter Un catagorie</a>
+                          <a  class="dropdown-item" routerLink="/AjoutCategorie">liste des catagories</a>
                       </div>
                   </div>
                   <div class="nav-item dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Produits</a>
                       <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                          <a  class="dropdown-item">Liste des Produits</a>
-                          <a  class="dropdown-item">Ajouter Un Produits</a>
+                          <a  class="dropdown-item" routerLink="/ListeProduit">Liste des Produits</a>
+                          <a  class="dropdown-item" routerLink="/AjoutProduit">Ajouter Un Produits</a>
                       </div>
                   </div>
                   <div class="nav-item dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Annonces</a>
                       <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                          <a  class="dropdown-item">Liste des Annonces</a>
+                          <a  class="dropdown-item" routerLink="/ListeAnnonces">Liste des Annonces</a>
                       </div>
                   </div>
                   <div class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Commandes</a>
+                      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Utilisateur</a>
                       <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                          <a  class="dropdown-item">Liste des Commandes</a>
+                          <a  class="dropdown-item" routerLink="/ListeUtilisateur">Liste des Utilisateur</a>
                       </div>
                   </div>
-                  <a  class="nav-item nav-link">Contact</a>
               </div>
               <div class="d-flex m-3 me-0">
-                <button class="btn-search btn btn-outline-success btn-md-square rounded-circle me-4"
+                <button class="btn-search btn btn-outline-success btn-md-square rounded-circle "
                         data-bs-toggle="modal" data-bs-target="#searchModal">
                   <i class="fas fa-search fa-sm"></i> <!-- Remplacer par fa-lg pour réduire la taille -->
                 </button>
+                <ul>
+                  <li class="nav-item dropdown">
+                    <a href="#" class="btn btn-outline-success dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-user fa-sm"></i> <!-- Remplacer par fa-lg pour réduire la taille -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 
-                <!-- <a href="#" class="position-relative me-4 my-auto btn btn-outline-success" aria-expanded="false">
-                  <i class="fa fa-shopping-bag fa-sm"></i>
-                  <span class="position-absolute bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                        style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                </a> -->
+                        <div class="profile-dis scrollable">
+                            <a class="dropdown-item" href="javascript:void(0)">
+                                <i class="ti-user m-r-5 m-l-5"></i> Mon profil</a>
 
-                <div class="dropdown">
-                  <!-- Bouton de l'utilisateur -->
-                  <a href="#" class="btn btn-outline-success dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user fa-sm"></i> <!-- Remplacer par fa-lg pour réduire la taille -->
-                  </a>
+                            <button  (click)="logoutApp()" class="dropdown-item btn text-danger" href="">
+                                <i class="fa fa-power-off m-r-5 m-l-5"></i> Deconnexion</button>
+                            <div class="dropdown-divider"></div>
+                        </div>
 
-                  <!-- Menu déroulant -->
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <li><button class="dropdown-item"  (click)="logoutApp()">Déconnexion</button></li>
-                  </ul>
-                </div>
+                    </div>
+                </li>
+                </ul>
               </div>
 
           </div>

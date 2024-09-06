@@ -23,12 +23,13 @@
           <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
               <div class="navbar-nav mx-auto">
                   <a  class="nav-item nav-link ">Accueil</a>
-                  <a  class="nav-item nav-link ">boutique</a>
+                  <a routerLink="/boutiqueClient"  class="nav-item nav-link ">boutique</a>
 
 
 
                   <a  class="nav-item nav-link">Contact</a>
               </div>
+
               <div class="d-flex m-3 me-0">
                 <button class="btn-search btn btn-outline-success btn-md-square rounded-circle me-4"
                         data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -50,14 +51,38 @@
                   <!-- Menu déroulant -->
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 
-                    <li><button class="dropdown-item"  (click)="logoutApp()">Déconnexion</button></li>
+                    <li>  <button  class="dropdown-item " href="">
+                      <i class="fa fa-user  m-r-5 m-l-5"></i> Mon Profil</button></li>
+                    <li>  <button  (click)="logoutApp()" class="dropdown-item btn text-danger" href="">
+                      <i class="fa fa-power-off m-r-5 m-l-5"></i> Deconnexion</button></li>
 
                   </ul>
                 </div>
               </div>
 
-          </div>
+
+
+            </div>
+
       </nav>
   </div>
 </div>
 <!-- Navbar End -->
+<ul>
+  <li class="nav-item dropdown">
+    <a href="#" class="btn btn-outline-success dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-user fa-sm"></i> <!-- Remplacer par fa-lg pour réduire la taille -->
+    </a>
+    <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+
+        <div class="profile-dis scrollable">
+            <a class="dropdown-item" href="javascript:void(0)">
+                <i class="ti-user m-r-5 m-l-5"></i> Mon profil</a>
+            <button  (click)="logoutApp()" class="dropdown-item btn text-danger" href="">
+                <i class="fa fa-power-off m-r-5 m-l-5"></i> Deconnexion</button>
+            <div class="dropdown-divider"></div>
+        </div>
+
+    </div>
+</li>
+</ul>

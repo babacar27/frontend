@@ -1,0 +1,56 @@
+<app-nav-bar-admin></app-nav-bar-admin>
+<div class="container-fluid page-header py-5">
+  <h1 class="text-center text-white display-6">Liste Des Produits</h1>
+  <ol class="breadcrumb justify-content-center mb-0">
+      <li class="breadcrumb-item"><a href="#">Produit</a></li>
+      <li class="breadcrumb-item active text-white">Liste des Produits</li>
+  </ol>
+</div>
+<div class="container-fluid py-5">
+  <div class="container py-5">
+    <h1 >Liste des Produits</h1>
+      <div class="table-responsive">
+        <div class="">
+          <a routerLink="/AjoutProduit" class="btn border-secondary rounded-pill px-4 py-2 text-primary float-end" type="button">Ajouter</a>
+      </div >
+          <table class="table mt-5">
+              <thead>
+                <tr>
+                  <th scope="col">Photo</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">libelle</th>
+                  <th scope="col">Status</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <th scope="row">
+                          <div class="d-flex align-items-center">
+                              <img src="../assets/assets/img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                          </div>
+                      </th>
+                      <td>
+                          <p class="mb-0 mt-4">Big Banana</p>
+                      </td>
+                      <td>
+                          <p class="mb-0 mt-4">2.99 $</p>
+                      </td>
+
+                      <td >
+                          <button class="btn btn-md rounded-circle bg-light border mt-4 "  >
+                              <i class="fa fa-times text-danger"></i>
+                          </button>
+                          <button class="btn btn-md rounded-circle bg-light border mt-4 offset-1" >
+                              <i class="fa fa-check text-success"></i>
+                          </button>
+                      </td>
+
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+
+  </div>
+</div>
