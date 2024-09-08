@@ -7,57 +7,59 @@
       <li class="breadcrumb-item active text-white">Ajout produit</li>
   </ol>
 </div>
-<div class="container-fluid py-5  offset-2" >
-  <div class="container py-5">
+<div class="container-fluid py-5  offset-2">
+    <div class="container py-5">
       <h1 class="mb-4 offset-3">Ajout Produit</h1>
-      <form action="#" class=" offset-1">
-          <div class="row g-5">
-              <div class="col-md-12 col-lg-6 col-xl-7">
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Nom<sup>*</sup></label>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Statut<sup>*</sup></label>
-                              <select formControlName="statut" class="form-control bg-light " id="roleInput">
-                                <!-- <option value="admin">Administrateur</option> -->
-                                <option value="publier">Publier</option>
-                                <option value="archiver">Archiver</option>
-                              </select>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Status<sup>*</sup></label>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">photo<sup>*</sup></label>
-                              <input type="file" class="form-control">
-
-                          </div>
-                      </div>
-                  </div>
-
-                  <button
-                  type="submit"
-                  class="btn btn-success mt-5"
-                >
-                  Ajouter
-                </button>
-
-
+      <form [formGroup]="produitForm" (ngSubmit)="onSubmit()" class="offset-1">
+        <div class="row g-5">
+          <div class="col-md-12 col-lg-6 col-xl-7">
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <div class="form-item w-100">
+                  <label class="form-label my-3">Nom<sup>*</sup></label>
+                  <input type="text" class="form-control" formControlName="nom">
+                </div>
               </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="form-item w-100">
+                  <label class="form-label my-3">libelle<sup>*</sup></label>
+                  <input type="text" class="form-control" formControlName="libelle">
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="form-item w-100">
+                  <label class="form-label my-3">Statut<sup>*</sup></label>
+                  <select formControlName="statut" class="form-control bg-light" id="statutInput">
+                    <option value="publier">publier</option>
+                    <option value="archiver">archiver</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <div class="form-item w-100">
+                  <label class="form-label my-3">Catégorie<sup>*</sup></label>
+                  <select formControlName="categorie_id" class="form-control bg-light" id="categorieInput">
+                    <option *ngFor="let categorie of categories" [value]="categorie.id">
+                      {{ categorie.nomCategorie }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <div class="form-item w-100">
+                  <label class="form-label my-3">Image<sup>*</sup></label>
+                  <input type="file" class="form-control" (change)="onFileChange($event)">
+                </div>
+              </div>
+            </div>
 
+            <button type="submit" class="btn btn-success mt-5">Ajouter</button>
           </div>
+        </div>
       </form>
+    </div>
   </div>
-</div>
+
+
