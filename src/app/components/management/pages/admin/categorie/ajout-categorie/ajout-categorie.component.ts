@@ -14,53 +14,56 @@ export class AjoutCategorieComponent implements OnInit {
   categories: Categorie[] = [];
   errorMessage: string | null = null; // Pour gérer les erreurs
   successMessage: string | null = null; // Pour gérer les messages de succès
+  imagePreview: string | null = null; // Prévisualisation de l'image
+  baseUrl: string = 'http://127.0.0.1:8000/storage/images/categories/'; // Base URL pour les images
 
   constructor(private categorieService: CategorieService, private fb: FormBuilder) {
     this.categorieForm = this.fb.group({
       nomCategorie: ['', Validators.required],
-      image: [null],
+      image: [null, Validators.required],
       statut: ['publie']
     });
   }
 
   ngOnInit(): void {
-    // Chargement initial des catégories
     this.loadCategories();
   }
 
-  // Fonction pour charger les catégories
   loadCategories(): void {
     this.categorieService.getCategories().subscribe(response => {
-      console.log('Réponse de l\'API:', response); // Ajoutez un log pour voir la structure de la réponse
-      this.categories = response; // Directement attribuer la réponse au tableau des catégories
+      console.log('Réponse de l\'API:', response);
+      this.categories = response;
     }, error => {
       console.error('Erreur lors du chargement des catégories:', error);
       this.errorMessage = 'Erreur lors du chargement des catégories.';
     });
   }
 
-  // Fonction pour créer une nouvelle catégorie
   createCategorie(formData: FormData): void {
     this.categorieService.createCategorie(formData).subscribe(response => {
       this.successMessage = 'Catégorie créée avec succès !';
+      this.errorMessage = null;
+
       this.categorieForm.reset({
-        statut: 'publie' // Réinitialiser le formulaire avec la valeur par défaut
+        statut: 'publie'
       });
-      // Recharger la liste des catégories après création
+
+      this.imagePreview = null;
       this.loadCategories();
     }, error => {
       console.error('Erreur lors de la création de la catégorie:', error);
       this.errorMessage = 'Erreur lors de la création de la catégorie.';
+      this.successMessage = null;
     });
   }
 
-  // Fonction appelée lors de la soumission du formulaire
   onSubmit(): void {
-    this.errorMessage = null; // Réinitialiser les messages d'erreur
-    this.successMessage = null; // Réinitialiser les messages de succès
+    this.errorMessage = null;
+    this.successMessage = null;
 
     if (this.categorieForm.invalid) {
-      return; // Arrêtez le traitement si le formulaire est invalide
+      this.errorMessage = 'Veuillez remplir correctement le formulaire.';
+      return;
     }
 
     const formData = new FormData();
@@ -72,18 +75,38 @@ export class AjoutCategorieComponent implements OnInit {
       formData.append('image', image);
     }
 
-    // Créer la catégorie
     this.createCategorie(formData);
   }
 
-  // Fonction pour gérer le changement de fichier
   onFileChange(event: any): void {
     const file = event.target.files[0];
+    
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        this.errorMessage = 'Veuillez sélectionner un fichier image valide.';
+        return;
+      }
+
       this.categorieForm.patchValue({
         image: file
       });
       this.categorieForm.get('image')?.updateValueAndValidity();
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
+  }
+
+  getImageUrl(imagePath: string | null): string {
+    if (!imagePath) {
+      console.warn('Aucun chemin d\'image fourni, retour à l\'image par défaut.');
+      return 'assets/default-image.jpg'; // Chemin d'accès à l'image par défaut
+    }
+    const fullUrl = `${this.baseUrl}${imagePath}`;
+    console.log('URL générée pour l\'image:', fullUrl);
+    return fullUrl;
   }
 }

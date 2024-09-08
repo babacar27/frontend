@@ -24,6 +24,7 @@ import { MesAnnoncesComponent } from './components/management/pages/vendeur/anno
 import { ListeCommandeComponent } from './components/management/pages/admin/commande/liste-commande/liste-commande.component';
 import { MesCommandeComponent } from './components/management/pages/vendeur/commande/mes-commande/mes-commande.component';
 import { ProduitComponent } from './components/management/pages/client/produit/produit.component';
+import { AccueilComponent } from './components/management/pages/vendeur/accueil/accueil.component';
 
 const routes: Routes = [
 
@@ -68,6 +69,7 @@ const routes: Routes = [
   {path: 'AjoutProduit', component: AjoutProduitAdminComponent},
   {path: 'ListeAnnonces', component: ListeAnnoncesComponent},
   {path: 'ListeUtilisateur', component: ListeUtilisateurComponent},
+  {path: 'Accueil', component: AccueilComponent},
 
 
 

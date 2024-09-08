@@ -1,3 +1,12 @@
+export interface Categorie {
+  id: number;
+  nomCategorie: string;
+  image: string | null;
+  statut: string;
+  updated_at: string;
+  created_at: string;
+}
+
 export interface Produit {
     nom: string;
     libelle: string | null;
@@ -7,7 +16,8 @@ export interface Produit {
     created_at: string;
     categorie_id: number; // Clé étrangère pour la catégorie
     id: number;
-    image_url?: string | null; 
+    categorie: Categorie; 
+    
   }
   
   export interface ProduitResponse {

@@ -24,7 +24,6 @@ export class RegisterComponent {
     role: new FormControl('', [Validators.required]),
     adresse: new FormControl('', [Validators.required]),
     telephone: new FormControl('', [Validators.required]),
-    statut: new FormControl('', [Validators.required])
   }, { validators: passwordMatchValidator() });
 
   constructor(
