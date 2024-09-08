@@ -16,10 +16,10 @@ export interface Produit {
     created_at: string;
     categorie_id: number; // Clé étrangère pour la catégorie
     id: number;
-    categorie: Categorie; 
-    
+    categorie: Categorie;
+
   }
-  
+
   export interface ProduitResponse {
     message: string;
     data: Produit;
