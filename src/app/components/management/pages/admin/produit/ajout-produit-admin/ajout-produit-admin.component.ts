@@ -12,13 +12,13 @@ import { ProduitServiceService } from 'src/app/core/services/produit-service.ser
   styleUrls: ['./ajout-produit-admin.component.css']
 })
 export class AjoutProduitAdminComponent implements OnInit {
-  categories: Categorie[] = []; 
+  categories: Categorie[] = [];
   produitForm: FormGroup;
   produits: Produit[] = [];
   errorMessage: string | null = null; // Pour gérer les erreurs
   successMessage: string | null = null; // Pour gérer les messages de succès
   imagePreview: string | null = null; // Prévisualisation de l'image
-  baseUrl: string = 'http://127.0.0.1:8000/storage/images/produits/'; 
+  baseUrl: string = 'http://127.0.0.1:8000/storage/images/produits/';
 
   constructor(
     private produitService: ProduitServiceService,
@@ -37,7 +37,7 @@ export class AjoutProduitAdminComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
   }
-  
+
   createProduit(formData: FormData): void {
     this.produitService.createProduits(formData).subscribe(
       response => {
@@ -57,7 +57,7 @@ export class AjoutProduitAdminComponent implements OnInit {
       }
     );
   }
-  
+
   onSubmit(): void {
     this.errorMessage = null;
     this.successMessage = null;
@@ -85,7 +85,7 @@ export class AjoutProduitAdminComponent implements OnInit {
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
-    
+
     if (file) {
       if (!file.type.startsWith('image/')) {
         this.errorMessage = 'Veuillez sélectionner un fichier image valide.';
@@ -104,7 +104,7 @@ export class AjoutProduitAdminComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  
+
   loadCategories(): void {
     this.categorieService.getCategories().subscribe(
       response => {
