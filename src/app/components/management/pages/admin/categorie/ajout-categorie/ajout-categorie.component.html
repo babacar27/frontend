@@ -61,7 +61,8 @@
                 <tr *ngFor="let categorie of categories">
                   <th scope="row">
                     <div class="d-flex align-items-center mt-2">
-                      <img [src]="'http://127.0.0.1:8000/storage/images/categories/' + categorie.image" alt="{{ categorie.nomCategorie }}" style="width: 100px; height: 100px;">
+                      <img [src]="categorie.image ? 'http://127.0.0.1:8000' + categorie.image
+                      : 'assets/images/default-image.jpg'" style="width: 100px; height: 100px;">
 
 
                     </div>
