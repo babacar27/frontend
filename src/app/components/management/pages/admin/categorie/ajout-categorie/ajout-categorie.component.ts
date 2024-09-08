@@ -80,7 +80,7 @@ export class AjoutCategorieComponent implements OnInit {
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
-    
+
     if (file) {
       if (!file.type.startsWith('image/')) {
         this.errorMessage = 'Veuillez sélectionner un fichier image valide.';
