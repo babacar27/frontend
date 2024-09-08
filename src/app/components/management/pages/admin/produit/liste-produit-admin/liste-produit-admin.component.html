@@ -19,6 +19,7 @@
             <th scope="col">Photo</th>
             <th scope="col">Nom</th>
             <th scope="col">Libelle</th>
+            <th scope="col">Categorie</th>
             <th scope="col">Statut</th>
             <th colspan="2">Action</th>
           </tr>
@@ -39,6 +40,9 @@
             </td>
             <td>
               <p class="mb-0 mt-4">{{ produit.libelle }}</p>
+            </td>
+            <td>
+              <p class="mb-0 mt-4">{{ produit.categorie.nomCategorie }}</p>
             </td>
             <td>
               <p class="mb-0 mt-4">{{ produit.statut }}</p>
