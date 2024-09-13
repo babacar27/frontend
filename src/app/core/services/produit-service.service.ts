@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ProduitServiceService {
   private apiUrl = `${environnement.ApiUrl}/produits`; // URL de base pour l'API
+  private apiUrlid = `${environnement.ApiUrl}/produitsid`; // URL de base pour l'API
   private apiUrlV = `${environnement.ApiUrl}/litProduits`;
   private baseUrl = 'http://127.0.0.1:8000/storage/images/produits/';
   constructor(private http:HttpClient) {}
@@ -38,7 +39,7 @@ export class ProduitServiceService {
     const headers = this.getAuthHeaders();
     return this.http.post<ProduitResponse>(this.apiUrl, data, { headers });
   }
-  ///Api récupération des produits 
+  ///Api récupération des produits
   getProduits(): Observable<Produit[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<Produit[]>(this.apiUrl, { headers });
@@ -49,12 +50,27 @@ export class ProduitServiceService {
   }
   archiverProduit(id: number): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.baseUrl}/${id}/archiver`, {headers});
+    return this.http.put(`${this.baseUrl}${id}/archiver`, {headers});
   }
 
   // Publie un produit
   publierProduit(id: number): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.put(`${this.baseUrl}${id}/publier`, {headers});
+  }
+
+  getProduitById(id: number): Observable<Produit> { // Assure-toi que ça retourne un Produit
+    const headers = this.getAuthHeaders();
+    return this.http.get<Produit>(`${this.apiUrlid}/${id}`, { headers });
+  }
+
+  updateProduitStatus(id: number, statut: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.apiUrl}/${id}/status`, { statut }, { headers });
+  }
+
+  deleteProduit(id: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 }

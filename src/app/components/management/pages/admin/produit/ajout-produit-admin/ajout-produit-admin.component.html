@@ -10,54 +10,6 @@
 <div class="container-fluid py-5  offset-2">
     <div class="container py-5">
       <h1 class="mb-4 offset-3">Ajout Produit</h1>
-<<<<<<< HEAD
-      <form action="#" class=" offset-1">
-          <div class="row g-5">
-              <div class="col-md-12 col-lg-6 col-xl-7">
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Nom<sup>*</sup></label>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Statut<sup>*</sup></label>
-                              <select formControlName="statut" class="form-control bg-light " id="roleInput">
-                                <!-- <option value="admin">Administrateur</option> -->
-                                <option value="publier">Publier</option>
-                                <option value="archiver">Archiver</option>
-                              </select>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Status<sup>*</sup></label>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">photo<sup>*</sup></label>
-                              <input type="file" class="form-control">
-
-                          </div>
-                      </div>
-                  </div>
-
-
-                  <button
-                  type="submit"
-                  class="btn btn-success mt-5"
-                >
-                  Ajouter
-                </button>
-
-
-=======
       <form [formGroup]="produitForm" (ngSubmit)="onSubmit()" class="offset-1">
         <div class="row g-5">
           <div class="col-md-12 col-lg-6 col-xl-7">
@@ -67,7 +19,6 @@
                   <label class="form-label my-3">Nom<sup>*</sup></label>
                   <input type="text" class="form-control" formControlName="nom">
                 </div>
->>>>>>> 48c8446b7441c44734aa1607ee7de3c3e836042a
               </div>
               <div class="col-md-12 col-lg-6">
                 <div class="form-item w-100">
@@ -110,5 +61,5 @@
       </form>
     </div>
   </div>
-
+<app-footer></app-footer>
 

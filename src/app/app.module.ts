@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccueilAdminComponent } from './components/management/accueil/accueil-admin/accueil-admin.component';
 import { AccueilClientComponent } from './components/management/accueil/accueil-client/accueil-client.component';
 import { AccueilVendeurComponent } from './components/management/accueil/accueil-vendeur/accueil-vendeur.component';
@@ -50,6 +50,10 @@ import { SectionClient4Component } from './components/management/sectionClient/s
 import { SectionClient5Component } from './components/management/sectionClient/section-client5/section-client5.component';
 import { SectionClient6Component } from './components/management/sectionClient/section-client6/section-client6.component';
 import { SectionClient7Component } from './components/management/sectionClient/section-client7/section-client7.component';
+import { DetailAnnonceComponent } from './components/management/pages/vendeur/detail-annonce/detail-annonce.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ProfilAdminComponent } from './components/management/pages/admin/profil-admin/profil-admin.component';
+import { MoyenPaiementComponent } from './components/management/pages/client/moyen-paiement/moyen-paiement.component';
 
 
 @NgModule({
@@ -100,14 +104,18 @@ import { SectionClient7Component } from './components/management/sectionClient/s
      SectionClient4Component,
      SectionClient5Component,
      SectionClient6Component,
-     SectionClient7Component
+     SectionClient7Component,
+     DetailAnnonceComponent,
+     ProfilAdminComponent,
+     MoyenPaiementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+    FormsModule,
+    NgxPaginationModule
 
 
   ],

@@ -2,120 +2,100 @@
 <div class="main-container px-5" style="margin-top: 70px;">
   <div class="pd-ltr-20">
     <div class="card-box pd-20 height-100-p mb-30">
-      <div class="row align-items-center">
-        <div class="col-md-4">
-          <img [src]="userImageUrl" alt="User Image" *ngIf="userImageUrl" />
-        </div>
-        <div class="col-md-8">
-          <h4 class="font-20 weight-500 mb-10 text-capitalize">
-            Welcome back
-            <div class="weight-600 font-30 text-success">{{ userName }}!</div>
-          </h4>
-          <p class="font-18 max-width-600">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde hic non repellendus debitis iure, doloremque assumenda. Autem modi, corrupti, nobis ea iure fugiat, veniam non quaerat mollitia animi error corporis.
-          </p>
-        </div>
-      </div>
-    </div>
+
     <div class="xs-pd-20-10 pd-ltr-20">
-      <div class="title pb-20">
-        <h2 class="h3 mb-0">Vue d’ensemble de SEENTOOL</h2>
-      </div>
-      <div class="row pb-10">
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+      <a class="row pb-10">
+        <a href="" class="col-xl-3 col-lg-3 col-md-6 mb-20">
           <div class="card-box height-100-p widget-style3">
             <div class="d-flex flex-wrap">
               <div class="widget-data">
-                <div class="weight-700 font-24 text-dark">75</div>
-                <div class="font-14 text-success weight-500">Appointment</div>
+                <div class="weight-700 font-24 text-dark">15</div>
+                <div class="font-14 text-success weight-500">
+                  Annonces
+                </div>
               </div>
               <div class="widget-icon">
                 <div class="icon" style="color: #00eccf;">
-                  <i class="icon-copy dw dw-calendar1"></i>
+                  <i class="bi bi-collection"></i>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        </a>
+        <a href="" class="col-xl-3 col-lg-3 col-md-6 mb-20">
           <div class="card-box height-100-p widget-style3">
             <div class="d-flex flex-wrap">
               <div class="widget-data">
-                <div class="weight-700 font-24 text-dark">124,551</div>
-                <div class="font-14 text-success weight-500">Total Patient</div>
+                <div class="weight-700 font-24 text-dark">5</div>
+                <div class="font-14 text-success weight-500">
+                  Commandes
+                </div>
               </div>
               <div class="widget-icon">
                 <div class="icon" style="color: #ff5b5b;">
-                  <span class="icon-copy ti-heart"></span>
+                  <span class="icon-copy ti-bag"></span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        </a>
+        <a href="" class="col-xl-3 col-lg-3 col-md-6 mb-20">
           <div class="card-box height-100-p widget-style3">
             <div class="d-flex flex-wrap">
               <div class="widget-data">
-                <div class="weight-700 font-24 text-dark">1,458</div>
-                <div class="font-14 text-success weight-500">To Verify</div>
+                <div class="weight-700 font-24 text-dark">0</div>
+                <div class="font-14 text-success weight-500">
+                 Commande Journaliere
+                </div>
               </div>
               <div class="widget-icon">
-                <div class="icon" style="color: #00a5e0;">
-                  <span class="icon-copy ti-check-box"></span>
+                <div class="icon">
+                  <i class="bi bi-cart4"></i>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        </a>
+        <a href="" class="col-xl-3 col-lg-3 col-md-6 mb-20">
           <div class="card-box height-100-p widget-style3">
             <div class="d-flex flex-wrap">
               <div class="widget-data">
-                <div class="weight-700 font-24 text-dark">40,569</div>
-                <div class="font-14 text-success weight-500">Total Income</div>
+                <div class="weight-700 font-24 text-dark">200000 XOF</div>
+                <div class="font-14 text-success weight-500">Recettes</div>
               </div>
               <div class="widget-icon">
-                <div class="icon" style="color: #ffbe5d;">
-                  <i class="icon-copy dw dw-money"></i>
+                <div class="icon"  style="color:#09cc06;">
+                  <i class="icon-copy fa fa-money" aria-hidden="true"></i>
+
                 </div>
               </div>
             </div>
           </div>
+        </a>
+      </a>
+    </div>
+    <div class="title pb-20">
+      <h2 class="h3 mb-0">Graphiques </h2>
+    </div>
+    <div class="row pb-10 col-md-12">
+      <!-- Compliance Trend Chart -->
+      <div class="col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3" style="box-shadow: 0 4px 8px rgba(232, 195, 8, 0.1); border-radius: 15px;">
+          <canvas id="compliance-trend"></canvas>
         </div>
       </div>
 
-      <div class="row pb-10">
-        <div class="col-xl-6 col-lg-6 col-md-12 mb-20">
-          <div class="card-box height-100-p pd-20">
-            <div class="d-flex justify-content-between">
-              <div class="title">
-                <h4 class="font-20 weight-500 mb-10 text-capitalize">Trends Compliance</h4>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control form-control-sm" placeholder="Search">
-              </div>
-            </div>
-            <div class="charts-container">
-              <canvas id="compliance-trend" height="100"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-12 mb-20">
-          <div class="card-box height-100-p pd-20">
-            <div class="d-flex justify-content-between">
-              <div class="title">
-                <h4 class="font-20 weight-500 mb-10 text-capitalize">Records Overview</h4>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control form-control-sm" placeholder="Search">
-              </div>
-            </div>
-            <div class="charts-container">
-              <canvas id="records-chart" height="100"></canvas>
-            </div>
-          </div>
+      <!-- Records Chart -->
+      <div class=" col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+          <canvas id="records-chart"></canvas>
         </div>
       </div>
     </div>
   </div>
+
 </div>
+
+
+
+<app-footer></app-footer>

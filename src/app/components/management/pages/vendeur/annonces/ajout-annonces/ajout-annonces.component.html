@@ -1,94 +1,130 @@
 <app-nav-bar-vendeur></app-nav-bar-vendeur>
+
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Checkout</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Pages</a></li>
-      <li class="breadcrumb-item active text-white">Checkout</li>
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+    <li class="breadcrumb-item active text-white">Checkout</li>
   </ol>
 </div>
-<!-- Single Page Header End -->
-
 
 <!-- Checkout Page Start -->
 <div class="container-fluid py-5">
   <div class="container py-5">
-      <h1 class="mb-4"> Ajouter Annonces</h1>
-      <form action="#">
-          <div class="row g-5">
-              <div class="col-md-12 col-lg-6 col-xl-7">
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">produit<sup>*</sup></label>
-                              <select formControlName="statut" class="form-control " id="statutInput">
-                                <option value="tomate">Tomate</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="col-md-12 col-lg-6">
-                        <div class="form-item w-100">
-                            <label class="form-label my-3">Prix<sup>*</sup></label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12 col-lg-6">
-                          <div class="form-item w-100">
-                              <label class="form-label my-3">Quantite<sup>*</sup></label>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-
-                      <div class="col-md-12 col-lg-6">
-                        <div class="form-item w-100">
-                            <label class="form-label my-3">Description<sup>*</sup></label>
-                              <textarea name="" id="" class="form-control"></textarea>
-                        </div>
-                    </div>
-                  </div>
-
-                  <button
-                  type="submit"
-                  class="btn btn-success mt-3 offset-10"
-                >
-                  Annoncer
-                </button>
+    <h1 class="mb-4">Ajouter Annonces</h1>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+    <form [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
+      <div class="row g-5">
+        <div class="col-md-12 col-lg-6 col-xl-6">
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <!-- <label class="form-label my-3">Produit ID<sup>*</sup></label>
+                <input type="text" class="form-control" [value]="annonceForm.get('produit_id')?.value" readonly> -->
+                <label class="form-label my-3">Statut<sup>*</sup></label>
+                <select formControlName="statut" class="form-control">
+                  <option value="publier">Publier</option>
+                  <option value="archiver">Archiver</option>
+                </select>
               </div>
-              <div class="col-md-12 col-lg-6 col-xl-5">
-                <h2>Liste Des Produits qui existent </h2>
-                  <div class="table-responsive">
-                      <table class="table">
-                          <thead>
-                              <tr>
-                                  <th scope="col">Photo</th>
-                                  <th scope="col">Nom</th>
-                                  <th scope="col">Libelle</th>
-
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <th scope="row">
-                                      <div class="d-flex align-items-center mt-2">
-                                          <img src="../assets/assets/img/vegetable-item-2.jpg" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
-                                      </div>
-                                  </th>
-                                  <td class="py-5">Awesome Brocoli</td>
-                                  <td class="py-5">$69.00</td>
-
-                              </tr>
-
-
-                          </tbody>
-                      </table>
-                  </div>
-
-
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Prix<sup>*</sup></label>
+                <input type="text" class="form-control" formControlName="prix">
+                <div *ngIf="annonceForm.get('prix')?.invalid && annonceForm.get('prix')?.touched">
+                  <small class="text-danger">Le prix est requis et doit être supérieur à 0.</small>
+                </div>
               </div>
+            </div>
           </div>
-      </form>
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Quantité<sup>*</sup></label>
+                <input type="text" class="form-control" formControlName="quantite">
+                <div *ngIf="annonceForm.get('quantite')?.invalid && annonceForm.get('quantite')?.touched">
+                  <small class="text-danger">La quantité est requise et doit être supérieure à 0.</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Date de Péremption<sup>*</sup></label>
+                <input type="date" formControlName="date_peremption" class="form-control">
+                <div *ngIf="annonceForm.get('date_peremption')?.invalid && annonceForm.get('date_peremption')?.touched">
+                  <small class="text-danger">La date de péremption est requise.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Traçabilité<sup>*</sup></label>
+                <textarea formControlName="tracabilite" class="form-control"></textarea>
+                <div *ngIf="annonceForm.get('tracabilite')?.invalid && annonceForm.get('tracabilite')?.touched">
+                  <small class="text-danger">La traçabilité est requise.</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Description<sup>*</sup></label>
+                <textarea formControlName="description" class="form-control"></textarea>
+                <div *ngIf="annonceForm.get('description')?.invalid && annonceForm.get('description')?.touched">
+                  <small class="text-danger">La description est requise.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success mt-3 offset-10"
+            [disabled]="annonceForm.invalid || isSubmitting">
+            Annoncer
+          </button>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-6">
+          <h2>Produit Sélectionné</h2>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Photo</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Libellé</th>
+                  <th scope="col">Catégorie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="produit">
+                  <th scope="row">
+                    <div class="d-flex align-items-center mt-2">
+                      <img [src]="produit?.image ? 'http://127.0.0.1:8000' + produit.image : 'assets/images/default-image.jpg'"
+                           class="img-fluid me-5 rounded-circle"
+                           style="width: 80px; height: 80px;"
+                           alt="{{ produit?.nom }}">
+                    </div>
+                  </th>
+                  <td>{{ produit.nom }}</td>
+                  <td>{{ produit.libelle }}</td>
+                  <td>{{ produit.categorie.nomCategorie }}</td>
+                </tr>
+                <tr *ngIf="!produit">
+                  <td colspan="4" class="text-center">Aucun produit sélectionné</td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 <!-- Checkout Page End -->
+

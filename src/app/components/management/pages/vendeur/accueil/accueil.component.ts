@@ -14,7 +14,7 @@ constructor(private produitService :ProduitServiceService){}
   ngOnInit(): void {
     this.loadProduits();
   }
- 
+
   loadProduits(): void {
     this.produitService.getProduitsV().subscribe({
       next: (data: Produit[]) => {

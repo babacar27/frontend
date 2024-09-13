@@ -11,13 +11,15 @@
 <div class="container-fluid py-5">
   <div class="container py-5">
     <h1 class="mb-4">Catégories</h1>
-
+  <!-- Messages de succès et d'erreur -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
     <!-- Formulaire de création de catégorie -->
     <form [formGroup]="categorieForm" (ngSubmit)="onSubmit()">
       <div class="row g-5">
-        <div class="col-md-12 col-lg-6 col-xl-7">
+        <div class="col-md-12 col-lg-6 col-xl-6">
           <div class="row">
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-5">
               <div class="form-item w-100">
                 <label class="form-label my-3">Nom<sup>*</sup></label>
                 <input type="text" formControlName="nomCategorie" class="form-control">
@@ -26,7 +28,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-5">
               <div class="form-item w-100">
                 <label class="form-label my-3">Statut<sup>*</sup></label>
                 <select formControlName="statut" class="form-control bg-light" id="statut">
@@ -36,18 +38,18 @@
               </div>
             </div>
           </div>
-          <div class="form-item">
+          <div class="form-item col-md-12 col-lg-10">
             <label class="form-label my-3">Photo<sup>*</sup></label>
             <input type="file" (change)="onFileChange($event)" class="form-control">
           </div>
-          <button type="submit" class="btn btn-success mt-5" [disabled]="categorieForm.invalid">Ajouter</button>
+          <!-- <button type="submit" class="btn btn-success mt-5" [disabled]="categorieForm.invalid">Ajouter</button> -->
 
-          <!-- Messages de succès et d'erreur -->
-          <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
-          <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+          <button type="submit" class="btn btn-success mt-5" [disabled]="categorieForm.invalid">
+            {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+          </button>
         </div>
 
-        <div class="col-md-12 col-lg-6 col-xl-5">
+        <div class="col-md-12 col-lg-7 col-xl-6">
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -55,27 +57,49 @@
                   <th scope="col">Photo</th>
                   <th scope="col">Nom</th>
                   <th scope="col">Statut</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let categorie of categories">
                   <th scope="row">
                     <div class="d-flex align-items-center mt-2">
-                      <img [src]="categorie.image ? 'http://127.0.0.1:8000' + categorie.image
-                      : 'assets/images/default-image.jpg'" style="width: 100px; height: 100px;">
-
-
+                      <img [src]="categorie.image ? 'http://127.0.0.1:8000' + categorie.image : 'assets/images/default-image.jpg'"
+                           style="width: 100px; height: 100px;">
                     </div>
                   </th>
                   <td class="py-5">{{ categorie.nomCategorie }}</td>
-                  <td class="py-5">{{ categorie.statut }}</td>
+                  <td class="py-5">
+                    <button class="btn btn-success btn-sm"
+                            [disabled]="categorie.statut === 'publie'"
+                            (click)="updateCategorieStatus(categorie.id, 'publie')">
+                      Publié
+                    </button>
+                    <button class="btn btn-warning btn-sm offset-1"
+                            [disabled]="categorie.statut === 'archive'"
+                            (click)="updateCategorieStatus(categorie.id, 'archive')">
+                      Archivé
+                    </button>
+                  </td>
+                  <td>
+                    <!-- Optionnel : Bouton de suppression -->
+                    <button (click)="editCategorie(categorie)" class="btn btn-md rounded-circle bg-light border ">
+                    <i class="fa fa-pen text-info"></i>
+
+                    </button>
+                    <button (click)="deleteCategorie(categorie.id)" class="btn btn-md rounded-circle bg-light border offset-1 ">
+                    <i class="fa fa-times text-danger"></i>
+
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
         </div>
       </div>
     </form>
   </div>
 </div>
-
+<app-footer></app-footer>

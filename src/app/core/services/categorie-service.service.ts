@@ -71,4 +71,11 @@ export class CategorieService {
     const headers = this.getAuthHeaders();
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
+
+   // Méthode pour mettre à jour le statut d'une catégorie
+updateCategorieStatus(id: number, statut: string): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.patch(`${this.apiUrl}/${id}/status`, { statut }, { headers });
+}
+
 }

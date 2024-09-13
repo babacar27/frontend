@@ -1,67 +1,125 @@
 <app-nav-bar-admin></app-nav-bar-admin>
+
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Liste Des utilisateurs</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-      <li class="breadcrumb-item"><a href="#">Utilisateur</a></li>
-      <li class="breadcrumb-item active text-white">Liste des Utilisateur</li>
+    <li class="breadcrumb-item"><a href="#">Utilisateur</a></li>
+    <li class="breadcrumb-item active text-white">Liste des Utilisateur</li>
   </ol>
 </div>
-<div class="container-fluid py-5">
-  <div class="container py-5">
-    <h1 >Liste des Utilisateurs</h1>
-      <div class="table-responsive">
 
-          <table class="table mt-5">
-              <thead>
-                <tr>
-                  <th scope="col">Photo</th>
-                  <th scope="col">Nom et Prenom</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Telephone</th>
-                  <th scope="col">Adresse</th>
-                  <th scope="col">Status</th>
-                  <th colspan="2">Action</th>
+<div class="container-fluid py-1">
+  <div class="container py-1">
+    <h1 class="mb-4">Liste des Utilisateurs</h1>
 
-
-                </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <th scope="row">
-                          <div class="d-flex align-items-center">
-                              <img src="../assets/assets/img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                          </div>
-                      </th>
-                      <td>
-                          <p class="mb-0 mt-4">Big Banana</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
-                      </td>
-
-                      <td >
-                          <button class="btn btn-md rounded-circle bg-light border mt-4 "  >
-                              <i class="fa fa-times text-danger"></i>
-                          </button>
-                          <button class="btn btn-md rounded-circle bg-light border mt-4 offset-1" >
-                              <i class="fa fa-check text-success"></i>
-                          </button>
-                      </td>
-
-                  </tr>
-              </tbody>
-          </table>
+    <!-- Barre de recherche stylisée -->
+    <div class=" d-flex justify-content-end">
+      <div class="input-group col-md-6 col-lg-5 col-xl-4 ">
+        <input
+          type="search"
+          class="form-control p-3"
+          placeholder="Rechercher par nom ou email..."
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="filterUsers()"
+          aria-describedby="search-icon-1"
+        />
+        <span id="search-icon-1" class="input-group-text">
+          <i class="fa fa-search"></i>
+        </span>
       </div>
+    </div>
 
+    <!-- Sélecteur de rôle -->
+    <div class="mb-4 d-flex justify-content-start">
+      <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between col-md-6 col-lg-5 col-xl-4">
+        <label for="roleFilter" class="mb-0">Filtrer par rôle :</label>
+        <select
+          id="roleFilter"
+          class="form-select-sm border-0 bg-light"
+          (change)="onRoleChange($event)"
+        >
+          <option value="">Tous les rôles</option>
+          <option value="admin">Admin</option>
+          <option value="vendeur">Vendeurs</option>
+          <option value="client">Clients</option>
+        </select>
+      </div>
+    </div>
 
+    <!-- Tableau des utilisateurs -->
+    <div class="table-responsive">
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Nom et Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Statut</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let user of filteredUsers">
+            <th scope="row">
+              <div class="d-flex align-items-center">
+                <img
+                  [src]="user.photo ? 'http://127.0.0.1:8000' + user.photo : 'assets/images/default-image.jpg'"
+                  class="img-fluid me-3 rounded-circle"
+                  style="width: 80px; height: 80px;"
+                  alt="{{ user.name }}"
+                />
+              </div>
+            </th>
+            <td>
+              <p class="mb-0 mt-4">{{ user.name }}</p>
+            </td>
+            <td>
+              <p class="mb-0 mt-4">{{ user.email }}</p>
+            </td>
+            <td>
+              <p class="mb-0 mt-4">{{ user.telephone }}</p>
+            </td>
+            <td>
+              <p class="mb-0 mt-4">{{ user.adresse }}</p>
+            </td>
+            <td>
+              <p class="mb-0 mt-4">{{ user.role }}</p>
+            </td>
+            <td class="py-5">
+              <!-- Bouton Débloquer -->
+              <button
+                class="btn btn-success btn-sm"
+                [disabled]="user.statut === 'debloquer'"
+                (click)="updateUserStatus(user.id, 'debloquer')"
+              >
+                Débloquer
+              </button>
+              <!-- Bouton Bloquer -->
+              <button
+                class="btn btn-warning btn-sm ms-2"
+                [disabled]="user.statut === 'bloquer'"
+                (click)="updateUserStatus(user.id, 'bloquer')"
+              >
+                Bloquer
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-md rounded-circle bg-light border mt-2"
+                (click)="deleteUser(user.id)"
+              >
+                <i class="fa fa-times text-danger"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+
 </div>
+<app-footer></app-footer>

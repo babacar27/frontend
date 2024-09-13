@@ -21,25 +21,32 @@ export class AccueilAdminComponent implements OnInit {
     const ctx = document.getElementById('compliance-trend') as HTMLCanvasElement;
     if (ctx) {
       const gradient = ctx.getContext('2d')!.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(0, 'rgb(245,236,66)');
-      gradient.addColorStop(1, 'rgba(66, 165, 245, 0.0)');
+      // Dégradé de vert
+      gradient.addColorStop(0, 'rgb(34, 139, 34)'); // Vert foncé
+      gradient.addColorStop(1, 'rgba(50, 205, 50, 0.0)'); // Vert clair transparent
+
+      const shadowCtx = ctx.getContext('2d');
+      if (shadowCtx) {
+        shadowCtx.shadowColor = 'rgba(0, 100, 0, 0.2)'; // Ombre légèrement verte
+        shadowCtx.shadowBlur = 10;
+      }
 
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: ['Fruits', 'Legumes', 'Cereales', 'Légumineuses ', 'Produits laitiers', 'Viandes et poissons'],
           datasets: [{
-            label: 'Compliance',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            borderColor: '#f5ec42',
-            backgroundColor: gradient,
-            pointBackgroundColor: '#f5ec42',
+            label: 'Vente de produits agricoles',
+            data: [10, 6, 3, 1, 0, 0],
+            borderColor: '#228B22', // Couleur de la ligne verte
+            backgroundColor: gradient, // Gradient vert
+            pointBackgroundColor: '#32CD32', // Points verts plus clairs
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: '#f5ec42',
+            pointHoverBorderColor: '#32CD32', // Bordure des points survolés en vert
             fill: true,
-            tension: 0.4,  // Smooth the line
-            borderWidth: 2,
+            tension: 0.3,  // Lissage modéré
+            borderWidth: 3,
           }]
         },
         options: {
@@ -50,7 +57,8 @@ export class AccueilAdminComponent implements OnInit {
               labels: {
                 color: '#333',
                 font: {
-                  size: 14,
+                  size: 16,
+                  family: 'Arial, sans-serif'
                 },
               },
             },
@@ -62,6 +70,9 @@ export class AccueilAdminComponent implements OnInit {
               },
               ticks: {
                 color: '#333',
+                font: {
+                  size: 12,
+                },
               },
             },
             y: {
@@ -70,6 +81,9 @@ export class AccueilAdminComponent implements OnInit {
               },
               ticks: {
                 color: '#333',
+                font: {
+                  size: 12,
+                },
               },
             },
           },
@@ -78,16 +92,18 @@ export class AccueilAdminComponent implements OnInit {
     }
   }
 
+
+
   initRecordsChart() {
     const ctx = document.getElementById('records-chart') as HTMLCanvasElement;
     if (ctx) {
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: ['Vendeur1(Babs)', 'Vendeur3(Ibou)', 'Vendeur4(Laye)', 'Vendeur7(Bara)', 'Vendeur5(baba)'],
           datasets: [{
             label: 'Records',
-            data: [28, 48, 40, 19, 86, 27, 90],
+            data: [5, 7, 4, 2, 2],
             backgroundColor: '#66BB6A',
             borderColor: '#43A047',
             borderWidth: 2,
@@ -124,7 +140,9 @@ export class AccueilAdminComponent implements OnInit {
               },
               ticks: {
                 color: '#333',
+
               },
+
             },
           },
         },

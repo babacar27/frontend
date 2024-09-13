@@ -25,6 +25,10 @@ import { ListeCommandeComponent } from './components/management/pages/admin/comm
 import { MesCommandeComponent } from './components/management/pages/vendeur/commande/mes-commande/mes-commande.component';
 import { ProduitComponent } from './components/management/pages/client/produit/produit.component';
 import { AccueilComponent } from './components/management/pages/vendeur/accueil/accueil.component';
+import { DetailAnnonceComponent } from './components/management/pages/vendeur/detail-annonce/detail-annonce.component';
+import { ProfilAdminComponent } from './components/management/pages/admin/profil-admin/profil-admin.component';
+import { PanierComponent } from './components/management/pages/client/panier/panier.component';
+import { MoyenPaiementComponent } from './components/management/pages/client/moyen-paiement/moyen-paiement.component';
 
 const routes: Routes = [
 
@@ -70,6 +74,9 @@ const routes: Routes = [
   {path: 'ListeAnnonces', component: ListeAnnoncesComponent},
   {path: 'ListeUtilisateur', component: ListeUtilisateurComponent},
   {path: 'Accueil', component: AccueilComponent},
+  {path: 'profil-admin', component: ProfilAdminComponent},
+  {path: 'panier', component: PanierComponent},
+  {path: 'paiement', component: MoyenPaiementComponent},
 
 
 
@@ -78,6 +85,7 @@ const routes: Routes = [
   {path: 'AjoutAnnonces', component: AjoutAnnoncesComponent},
   {path: 'MesCommande', component: MesCommandeComponent},
   {path: 'boutiqueClient', component: ProduitComponent},
+  {path: 'detail-annonces', component: DetailAnnonceComponent},
 
 
 

@@ -8,61 +8,89 @@
 </div>
 <div class="container-fluid py-5">
   <div class="container py-5">
-    <h1 >Mes Commandes</h1>
+    <h1 >Etat des Commandes</h1>
       <div class="table-responsive">
 
           <table class="table mt-5">
               <thead>
                 <tr>
-                  <th scope="col">Photo Produit</th>
-                  <th scope="col">Produit</th>
-                  <th scope="col">Client</th>
-                  <th scope="col">Numero</th>
-                  <th scope="col">Montant</th>
-                  <th scope="col">date</th>
-                  <th scope="col">Paiement</th>
-                  <th colspan="2">Action</th>
+                  <th scope="col">Numero Commande</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Details</th>
+                  <th scope="col">Total Commande</th>
+                  <th scope="col">Adresse</th>
+                  <th scope="col">Statut</th>
 
 
                 </tr>
               </thead>
               <tbody>
                   <tr>
-                      <th scope="row">
-                          <div class="d-flex align-items-center">
-                              <img src="../assets/assets/img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                          </div>
-                      </th>
+
                       <td>
-                          <p class="mb-0 mt-4">Big Banana</p>
+                          <p class="mb-0 mt-4">109876789YTYUIUYTR</p>
                       </td>
                       <td>
-                          <p class="mb-0 mt-4">Big Banana</p>
+                          <p class="mb-0 mt-4">Baye Bara Diop</p>
                       </td>
                       <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
+                          <p class="mb-0 mt-4">2</p>
                       </td>
                       <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
+                          <p class="mb-0 mt-4">20000.00 XOF</p>
                       </td>
                       <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
+                          <p class="mb-0 mt-4">Maristes</p>
                       </td>
                       <td>
-                          <p class="mb-0 mt-4">2.99 $</p>
+                        <!-- Bouton pour le statut "Publier" -->
+                        <button
+                          class="btn btn-sm btn-success "
+                        >
+                          Expédié
+                        </button>
+
+                        <!-- Bouton pour le statut "Archiver" -->
+
                       </td>
 
 
-                      <td >
-                          <button class="btn btn-md rounded-circle bg-light border mt-4 "  >
-                              <i class="fa fa-times text-danger"></i>
-                          </button>
-                          <button class="btn btn-md rounded-circle bg-light border mt-4 offset-1" >
-                              <i class="fa fa-check text-success"></i>
-                          </button>
-                      </td>
+
 
                   </tr>
+                  <tr>
+
+                    <td>
+                        <p class="mb-0 mt-4">25355677HSHHDKKDK</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">Abdoulaye Lo</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">3</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">40000.00 XOF</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">Mbao</p>
+                    </td>
+                    <td>
+                      <!-- Bouton pour le statut "Publier" -->
+                      <button
+                        class="btn btn-sm btn-info "
+                      >
+                        Marquer comme expédié
+                      </button>
+
+                      <!-- Bouton pour le statut "Archiver" -->
+
+                    </td>
+
+
+
+
+                </tr>
               </tbody>
           </table>
       </div>
