@@ -10,6 +10,8 @@ import { ProduitServiceService } from 'src/app/core/services/produit-service.ser
 export class ListeProduitAdminComponent implements OnInit {
   produits: Produit[] = [];
   serverUrl = 'http://127.0.0.1:8000/storage/images/produits/';
+  errorMessage: string | null = null; // Pour gérer les erreurs
+  successMessage: string | null = null; // Pour gérer les messages de succès
   constructor(private produitService: ProduitServiceService){}
   ngOnInit(): void {
     this.getProduits();
@@ -24,7 +26,7 @@ export class ListeProduitAdminComponent implements OnInit {
       }
     });
   }
-  
+
   archiverProduit(id: number): void {
     this.produitService.archiverProduit(id).subscribe({
       next: (response) => {
@@ -36,7 +38,7 @@ export class ListeProduitAdminComponent implements OnInit {
       }
     });
   }
-  
+
   publierProduit(id: number): void {
     this.produitService.publierProduit(id).subscribe({
       next: (response) => {
@@ -48,5 +50,45 @@ export class ListeProduitAdminComponent implements OnInit {
       }
     });
   }
-  
+  loadProduits(): void {
+    this.produitService.getProduits().subscribe(response => {
+      console.log('Réponse de l\'API:', response);
+      this.produits = response;
+    }, error => {
+      console.error('Erreur lors du chargement des catégories:', error);
+      this.errorMessage = 'Erreur lors du chargement des catégories.';
+    });
+  }
+
+
+  updateCategorieStatus(id: number, statut: string): void {
+    this.produitService.updateProduitStatus(id, statut).subscribe(() => {
+      this.successMessage = `Produit ${statut === 'publier' ? 'publiée' : 'archiver'} avec succès !`;
+      this.errorMessage = null;
+      this.loadProduits();
+    }, error => {
+      console.error('Erreur lors de la mise à jour du statut de la catégorie:', error);
+      this.errorMessage = 'Erreur lors de la mise à jour du statut de la catégorie.';
+      this.successMessage = null;
+    });
+  }
+
+
+
+  deleteProduit(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cette produit ?')) {
+      this.produitService.deleteProduit(id).subscribe(
+        (response) => {
+          this.successMessage = 'produit supprimée avec succès !';
+          this.loadProduits(); // Recharge la liste des catégories après suppression
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de la produit', error);
+          this.errorMessage = 'Erreur lors de la suppression de la produit.';
+        }
+      );
+    }
+  }
+
+
 }

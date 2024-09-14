@@ -163,16 +163,21 @@
                                   <h4>{{ produit.nom }}</h4>
                                   <p>{{ produit.libelle }}</p>
                                   <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                                      <i class="fa fa-shopping-bag me-2 text-primary"></i>Declarer un produit
+                                    <a
+                                      class="btn border border-secondary rounded-pill px-3 text-primary"
+                                      [routerLink]="['/AjoutAnnonces']"
+                                      [queryParams]="{ produitId: produit.id }"
+                                    >
+                                      <i class="fa fa-shopping-bag me-2 text-primary"></i> Déclarer un produit
                                     </a>
                                   </div>
+
                                 </div>
                               </div>
                             </div>
                           </div>
-                          
-                          
+
+
                           <div class="col-12">
                               <div class="pagination d-flex justify-content-center mt-5">
                                   <a href="#" class="rounded">&laquo;</a>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { AuthResponse } from '../models/auth/auth-reponse.module';
+import { AuthResponse, UserData } from '../models/auth/auth-reponse.module';
 import { environnement } from '../../environnements/environnement';
 
 
@@ -9,6 +9,7 @@ import { environnement } from '../../environnements/environnement';
   providedIn: 'root'
 })
 export class AuthServiceService {
+  private apiUrl = `${environnement.ApiUrl}/user`;
 redirctUrl: string='/login';
   isAuth (): boolean {
     const token = localStorage.getItem('token');
@@ -25,6 +26,14 @@ redirctUrl: string='/login';
       `${environnement.ApiUrl}/login`,
       request
     );
+  }
+
+  getUsers(): Observable<{statut: number, data: UserData[]}> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<{statut: number, data: UserData[]}>(`${environnement.ApiUrl}/users`, { headers });
   }
 
   getUserInfo(): Observable<AuthResponse> {
@@ -75,5 +84,34 @@ redirctUrl: string='/login';
        email);
   }
 
+// Récupère les informations du vendeur connecté
+getVendeur(): any {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user) : null; // Assurez-vous que les informations du vendeur incluent un champ 'id'
+}
+private getAuthHeaders(): HttpHeaders {
+  const token = localStorage.getItem('token');
+  if (token) {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  } else {
+    throw new Error('Token non disponible');
+  }
+}
 
+updateUserStatus(id: number, statut: string): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.patch(`${this.apiUrl}/${id}/status`, { statut }, { headers });
+}
+
+deleteUser(id: number): Observable<void> {
+  const headers = this.getAuthHeaders();
+  return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+}
+
+updateUser(id: number, userData: Partial<UserData>): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.put<any>(`${this.apiUrl}/${id}`, userData, { headers });
+}
 }

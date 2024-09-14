@@ -22,7 +22,7 @@
           </button>
           <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
               <div class="navbar-nav mx-auto">
-                  <a  class="nav-item nav-link ">Accueil</a>
+                  <a  class="nav-item nav-link " routerLink="/accueilAdmin">Accueil</a>
 
                   <div class="nav-item dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
@@ -63,8 +63,8 @@
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 
                         <div class="profile-dis scrollable">
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="ti-user m-r-5 m-l-5"></i> Mon profil</a>
+                            <a class="dropdown-item" href="javascript:void(0)" routerLink="/profil-admin">
+                                <i class="ti-user m-r-5 m-l-5" ></i> Mon profil</a>
 
                             <button  (click)="logoutApp()" class="dropdown-item btn text-danger" href="">
                                 <i class="fa fa-power-off m-r-5 m-l-5"></i> Deconnexion</button>

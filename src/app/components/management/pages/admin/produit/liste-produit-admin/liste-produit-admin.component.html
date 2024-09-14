@@ -44,22 +44,37 @@
             <td>
               <p class="mb-0 mt-4">{{ produit.categorie.nomCategorie }}</p>
             </td>
-            <td>
-              <p class="mb-0 mt-4">{{ produit.statut }}</p>
+            <td class="py-5">
+              <!-- Bouton Publié -->
+              <button class="btn btn-success btn-sm"
+                      [disabled]="produit.statut === 'publier'"
+                      (click)="updateCategorieStatus(produit.id, 'publier')">
+                Publié
+              </button>
+              <!-- Bouton Archivé -->
+              <button class="btn btn-warning btn-sm offset-1"
+                      [disabled]="produit.statut === 'archiver'"
+                      (click)="updateCategorieStatus(produit.id, 'archiver')">
+                Archivé
+              </button>
             </td>
             <td>
-              <button (click)="archiverProduit(produit.id)" class="btn btn-md rounded-circle bg-light border mt-4">
-                <i class="fa fa-times text-danger"></i>
+              <!-- Optionnel : Bouton de suppression -->
+              <button  class="btn btn-md rounded-circle bg-light border ">
+              <i class="fa fa-pen text-info"></i>
+
               </button>
-              <button (click)="publierProduit(produit.id)" class="btn btn-md rounded-circle bg-light border mt-4 offset-1">
-                <i class="fa fa-check text-success"></i>
+              <button (click)="deleteProduit(produit.id)" class="btn btn-md rounded-circle bg-light border offset-1 ">
+              <i class="fa fa-times text-danger"></i>
+
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      
+
     </div>
   </div>
 </div>
+<app-footer></app-footer>
 

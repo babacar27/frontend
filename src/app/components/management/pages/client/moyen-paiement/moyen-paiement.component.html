@@ -1,0 +1,84 @@
+<app-nav-bar-client></app-nav-bar-client>
+
+   <!-- Checkout Page Start -->
+   <div class="container-fluid py-5">
+    <div class="container py-5">
+      <div class="row g-5">
+        <!-- Colonne pour l'image -->
+        <div class="col-md-6 col-lg-7 d-flex justify-content-center align-items-center">
+          <img src="../assets/assets/vendors/images/paiement.png" alt="Image du produit" class="img-fluid" />
+        </div>
+        <!-- Colonne pour le tableau des détails de commande -->
+        <div class="col-md-6 col-lg-5">
+          <h1 class="mb-4">Détail de la Commande</h1>
+          <form action="#">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Produits</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <div class="d-flex align-items-center">
+                        <img src="../assets/assets/img/vegetable-item-3.png"
+                          class="img-fluid rounded-circle"
+                          style="width: 60px; height: 60px;"
+                          alt="Big Banana">
+                      </div>
+                    </th>
+                    <td>Banane</td>
+                    <td>1000.00</td>
+                    <td>1</td>
+                    <td>1000.00 XOF</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td>Total</td>
+                    <td>1000.00 XOF</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td>Livraison</td>
+                    <td>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="Shipping-2" value="Shipping">
+                        <label class="form-check-label" for="Shipping-2">Forfait: 2000.00 XOF</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"></td>
+                    <td>Total Général</td>
+                    <td>3000.00 XOF</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h2>Mode De Paiement</h2>
+            <!-- Options de paiement -->
+            <div class="form-check my-3">
+              <input type="checkbox" class="form-check-input" id="Delivery-1" value="Delivery">
+              <label class="form-check-label" for="Delivery-1">En Espèces</label>
+            </div>
+            <div class="form-check my-3">
+              <input type="checkbox" class="form-check-input" id="Paypal-1" value="Paypal">
+              <label class="form-check-label" for="Paypal-1">Électronique</label>
+            </div>
+            <!-- Bouton de commande -->
+            <button type="button" class="btn btn-outline-success w-50 text-uppercase offset-7">Commander</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+</div>
+<!-- Checkout Page End -->
+
+<app-footer></app-footer>
