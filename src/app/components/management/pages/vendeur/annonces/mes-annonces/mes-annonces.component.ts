@@ -42,7 +42,7 @@ export class MesAnnoncesComponent implements OnInit {
   getAnnonces(): void {
     if (this.vendeurId) {
       this.declarationService.getDeclarationsByVendeur(this.vendeurId).subscribe({
-        next: (data:Declaration[]) => {
+        next: (data: Declaration[]) => { // Assume data is an array of Declaration
           this.declarations = data;
           console.log('Déclarations récupérées :', this.declarations);
         },
@@ -53,6 +53,8 @@ export class MesAnnoncesComponent implements OnInit {
       });
     }
   }
+
+
 
   changerStatut(declaration: Declaration, nouveauStatut: string): void {
     // Assurez-vous que vendeurId n'est pas null avant de l'utiliser

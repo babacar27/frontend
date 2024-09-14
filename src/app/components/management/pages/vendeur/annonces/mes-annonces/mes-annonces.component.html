@@ -154,6 +154,7 @@
                               <th scope="col">Nom du produit</th>
                               <th scope="col">Description</th>
                               <th scope="col">Prix / kg</th>
+                              <th scope="col">categorie</th>
                               <th scope="col">Statut</th>
                             </tr>
                           </thead>
@@ -170,7 +171,8 @@
                               </td>
                               <td>{{ declaration.produit.nom }}</td>
                               <td>{{ declaration.description }}</td>
-                              <td>{{ declaration.prix }} / kg</td>
+                              <td>{{ declaration.prix }} XOF/ kg</td>
+                              <td>{{ declaration.produit.categorie?.nomCategorie }}</td>
                               <td>
                                 <!-- Bouton pour le statut "Publier" -->
                                 <button

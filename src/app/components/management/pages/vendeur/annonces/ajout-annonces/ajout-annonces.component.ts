@@ -80,6 +80,7 @@ export class AjoutAnnoncesComponent implements OnInit {
       next: (data: any) => {
         this.produit = data.produit;  // Assurez-vous que vous accédez à `data.produit`
         console.log('Produit récupéré:', this.produit);
+
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des données du produit', err);

@@ -112,7 +112,8 @@
                   </th>
                   <td>{{ produit.nom }}</td>
                   <td>{{ produit.libelle }}</td>
-                  <td>{{ produit.categorie.nomCategorie }}</td>
+                  <td>{{ produit.categorie?.nomCategorie || 'Non spécifié' }}</td>
+
                 </tr>
                 <tr *ngIf="!produit">
                   <td colspan="4" class="text-center">Aucun produit sélectionné</td>
