@@ -4,6 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environnement } from 'src/app/environnements/environnement';
 import { Declaration, Produit } from '../models/declaration/declaration-reponse.module';
+import { Router } from '@angular/router';
+import { LigneCommande, LigneCommandeResponse } from '../models/LigneCommande/ligneCommande-response.module';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,10 @@ export class DeclarationServiceService {
   private apiUrl = `${environnement.ApiUrl}/declarations`; // Utilisez l'URL de base de votre API
   private apiUrlV = `${environnement.ApiUrl}`; // Utilisez l'URL de base de votre API
   private apiUrlVe = `${environnement.ApiUrl}/litProduits`;
+  private apiUrlC = 'http://127.0.0.1:8000/api/lignes-commandes'; // URL de votre API
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient ,private router :Router) { }
 
   // Vérifier si l'utilisateur est authentifié (si un token est présent)
   isAuth(): boolean {
@@ -75,9 +79,19 @@ export class DeclarationServiceService {
       })
     );
   }
+  // Méthode pour récupérer toutes les déclarations
+  getDeclarations(): Observable<{ declarations: Declaration[] }> {
+    return this.http.get<{ declarations: Declaration[] }>(this.apiUrl).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la récupération des déclarations:', error);
+        throw error;
+      })
+    );
+  }
 
-
-
+  redirectToLogin() {
+    this.router.navigate(['/login']); // Redirection vers la page de connexion
+  }
   // Méthode pour récupérer une déclaration spécifique par ID
   getDeclarationById(id: number): Observable<any> {
     const headers = this.getAuthHeaders();
@@ -93,4 +107,29 @@ export class DeclarationServiceService {
     return this.http.get<Produit>(this.apiUrlVe, { headers });
   }
 
+  ajouterLigneCommande(declarationId: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<any>(this.apiUrlC, { declaration_id: declarationId }, { headers });
+  }
+  ///Méthode pour récupérer les commandes de chaque client
+  obtenirDeclarations(): Observable<LigneCommande[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<LigneCommande[]>(`${this.apiUrlC}/user`, { headers });
+  }
+   // Nouvelle méthode pour obtenir le nombre de lignes de commande par utilisateur
+   obtenirNombreLignesParUtilisateur(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<any>(`${this.apiUrlV}/lignes-par-utilisateur`, { headers });
+  }
+
+  // Stocker l'ID de l'utilisateur lors de la connexion
+  setUserId(userId: number): void {
+    localStorage.setItem('userId', userId.toString());
+  }
+
+  // Récupérer l'ID de l'utilisateur
+  getUserId(): number | null {
+    const userId = localStorage.getItem('userId');
+    return userId ? Number(userId) : null;
+  }
 }

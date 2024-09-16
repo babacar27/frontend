@@ -4,6 +4,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 
 export const AuthGuard : CanActivateFn= (route,state)=> {
+
  const authservice = inject (AuthServiceService);
  const router = inject (Router);
 

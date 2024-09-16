@@ -155,59 +155,33 @@
                   <div class="col-lg-9">
                       <div class="row g-4 justify-content-center">
 
-
-                          <div class="col-md-6 col-lg-6 col-xl-4">
+                           <div class="row">
+                            <div class="col-md-6 col-lg-6 col-xl-4" *ngFor="let declaration of declarations">
                               <div class="rounded position-relative fruite-item">
-                                  <div class="fruite-img">
-                                      <img src="../assets/assets/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                <div class="fruite-img">
+                                  <img  [src]="declaration.produit.image ? 'http://127.0.0.1:8000' + declaration.produit.image
+                                  : 'assets/images/default-image.jpg'" class="img-fluid w-100 rounded-top" alt="{{ declaration.produit.nom }}">
+                                </div>
+                                <div class="text-white bg-warning px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                  {{ declaration.produit.categorie?.nomCategorie || 'Categorie non disponible' }}
+                                </div>
+                                <div class="p-4 border border-warning border-top-0 rounded-bottom">
+                                  <h4>{{ declaration.produit.nom }}</h4>
+                                  <p>{{ declaration.description }}</p>
+                                  <p><strong>Adresse du vendeur:</strong> {{ declaration.vendeur.adresse }}</p>
+                                  <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold mb-0">{{ declaration.prix | currency:'USD' }} / kg</p>
+                                    <button (click)="addToCart(declaration.id)" class="btn btn-outline-warning border border-warning rounded-pill px-3 text-success">
+                                        <i class="fa fa-shopping-bag me-2 text-success"></i> Ajouter au panier
+                                      </button>
+
                                   </div>
-                                  <div class="text-white bg-warning px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                  <div class="p-4 border border-warning border-top-0 rounded-bottom">
-                                      <h4>Fraise</h4>
-                                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                      <div class="d-flex justify-content-between flex-lg-wrap">
-                                          <p class="text-dark fs-5 fw-bold mb-0">800.00 XOF/ kg</p>
-                                          <a href="#" class="btn  btn-outline-warning border border-warning rounded-pill px-3 text-success"><i class="fa fa-shopping-bag me-2 text-success"></i> Ajouter au Panier</a>
-                                      </div>
-                                  </div>
+                                </div>
                               </div>
+                            </div>
                           </div>
 
-                          <div class="col-md-6 col-lg-6 col-xl-4">
-                              <div class="rounded position-relative fruite-item">
-                                  <div class="fruite-img">
-                                      <img src="../assets/assets/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                  </div>
-                                  <div class="text-white bg-warning px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                  <div class="p-4 border border-warning border-top-0 rounded-bottom">
-                                      <h4>Banane</h4>
-                                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                      <div class="d-flex justify-content-between flex-lg-wrap">
-                                          <p class="text-dark fs-5 fw-bold mb-0">1000.00 XOF / kg</p>
-                                          <a href="#" class="btn  btn-outline-warning border border-warning rounded-pill px-3 text-success"><i class="fa fa-shopping-bag me-2 text-success"></i> Ajouter au Panier</a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-
-
-
-                          <div class="col-md-6 col-lg-6 col-xl-4">
-                              <div class="rounded position-relative fruite-item">
-                                  <div class="fruite-img">
-                                      <img src="../assets/assets/img/featur-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                  </div>
-                                  <div class="text-white bg-warning px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Legumes</div>
-                                  <div class="p-4 border border-warning border-top-0 rounded-bottom">
-                                      <h4>Choue</h4>
-                                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                      <div class="d-flex justify-content-between flex-lg-wrap">
-                                          <p class="text-dark fs-5 fw-bold mb-0">500.00 XOF / kg</p>
-                                          <a href="#" class="btn  btn-outline-warning border border-warning rounded-pill px-3 text-success"><i class="fa fa-shopping-bag me-2 text-success"></i> Ajouter au Panier</a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                          
                           <div class="col-12">
                               <div class="pagination d-flex justify-content-center mt-5">
                                   <a href="#" class="rounded">&laquo;</a>

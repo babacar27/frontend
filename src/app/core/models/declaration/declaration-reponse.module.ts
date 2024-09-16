@@ -1,15 +1,39 @@
 // declaration.model.ts
-export interface Categorie {
-  nomCategorie: string;
+export interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+  role: string;
+  adresse: string; // Adresse du vendeur
+  photo: string;
+  telephone: string;
+  statut: string;
 }
 
-export interface Produit {
+export interface Categorie {
   id: number;
-  nom: string;
+  nomCategorie: string;
+  image: string | null;
   statut: string;
-  libelle: string;
+  updated_at: string;
+  created_at: string;
+}
+
+
+export interface Produit {
+  nom: string;
+  libelle: string | null;
+  image: string;
+  statut: string;
+  updated_at: string;
+  created_at: string;
+  categorie_id: number; // Clé étrangère pour la catégorie
+  id: number;
   categorie: Categorie;
-  image?: string; // Ajoutez cette propriété si nécessaire
+
 }
 
 export interface Declaration {
@@ -21,5 +45,7 @@ export interface Declaration {
   tracabilite: string;
   date_peremption: string; // ou utilisez Date si vous préférez manipuler des objets Date
   statut: string;
+  vendeur_id: number;
   produit: Produit; // Détails du produit associés à la déclaration
+  vendeur: UserData; // Détails du vendeur associés à la déclaration
 }
