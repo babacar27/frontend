@@ -168,6 +168,7 @@
                                 <div class="p-4 border border-warning border-top-0 rounded-bottom">
                                   <h4>{{ declaration.produit.nom }}</h4>
                                   <p>{{ declaration.description }}</p>
+                                  <p>{{ declaration.quantite }} /Kg</p>
                                   <p><strong>Adresse du vendeur:</strong> {{ declaration.vendeur.adresse }}</p>
                                   <div class="d-flex justify-content-between flex-lg-wrap">
                                     <p class="text-dark fs-5 fw-bold mb-0">{{ declaration.prix | currency:'USD' }} / kg</p>

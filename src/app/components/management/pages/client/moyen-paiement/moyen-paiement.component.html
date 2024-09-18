@@ -24,31 +24,31 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let ligne of declarations">
                     <th scope="row">
                       <div class="d-flex align-items-center">
-                        <img src="../assets/assets/img/vegetable-item-3.png"
+                       <img [src]="ligne.declaration.produit.image ? 'http://127.0.0.1:8000' + ligne.declaration.produit.image : 'assets/images/default-image.jpg'"
                           class="img-fluid rounded-circle"
                           style="width: 60px; height: 60px;"
                           alt="Big Banana">
                       </div>
                     </th>
-                    <td>Banane</td>
-                    <td>1000.00</td>
-                    <td>1</td>
-                    <td>1000.00 XOF</td>
+                    <td>{{ligne.declaration.produit.nom}}</td>
+                    <td>{{ligne.prixUnitaire}}XOF</td>
+                    <td>{{ligne.quantite}}</td>
+                    <td>{{ ligne.prixUnitaire * ligne.quantite }}XOF</td>
                   </tr>
                   <tr>
                     <td colspan="3"></td>
                     <td>Total</td>
-                    <td>1000.00 XOF</td>
+                    <td>{{ total }} XOF</td>
                   </tr>
                   <tr>
                     <td colspan="3"></td>
                     <td>Livraison</td>
                     <td>
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="Shipping-2" value="Shipping">
+                        <input type="checkbox" class="form-check-input" id="Shipping-2" (change)="toggleFraisDeLivraison($event)" value="Shipping">
                         <label class="form-check-label" for="Shipping-2">Forfait: 2000.00 XOF</label>
                       </div>
                     </td>
@@ -56,7 +56,7 @@
                   <tr>
                     <td colspan="3"></td>
                     <td>Total Général</td>
-                    <td>3000.00 XOF</td>
+                    <td>{{ getTotalGeneral() }} XOF</td>
                   </tr>
                 </tbody>
               </table>
