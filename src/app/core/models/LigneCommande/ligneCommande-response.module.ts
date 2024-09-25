@@ -21,7 +21,7 @@ export interface Commande {
     client_id: number; // Clé étrangère pour la catégorie
     id: number;
     client: UserData;
-  
+
   }
   export interface Categorie {
     id: number;
@@ -31,8 +31,8 @@ export interface Commande {
     updated_at: string;
     created_at: string;
   }
-  
-  
+
+
   export interface Produit {
     nom: string;
     libelle: string | null;
@@ -43,9 +43,9 @@ export interface Commande {
     categorie_id: number; // Clé étrangère pour la catégorie
     id: number;
     categorie: Categorie;
-  
+
   }
-  
+
   export interface Declaration {
     id: number;
     produit_id: number;

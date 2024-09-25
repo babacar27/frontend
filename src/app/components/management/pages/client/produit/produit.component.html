@@ -165,13 +165,14 @@
                                 <div class="text-white bg-warning px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                                   {{ declaration.produit.categorie?.nomCategorie || 'Categorie non disponible' }}
                                 </div>
-                                <div class="p-4 border border-warning border-top-0 rounded-bottom">
+                                <div class="p-1 border border-warning border-top-0 rounded-bottom">
                                   <h4>{{ declaration.produit.nom }}</h4>
                                   <p>{{ declaration.description }}</p>
+                                  <p><strong>Adresse du vendeur:</strong> {{ declaration.tracabilite }}</p>
+
                                   <p>{{ declaration.quantite }} /Kg</p>
-                                  <p><strong>Adresse du vendeur:</strong> {{ declaration.vendeur.adresse }}</p>
                                   <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0">{{ declaration.prix | currency:'USD' }} / kg</p>
+                                    <p class="text-dark fs-5 fw-bold mb-0">{{ declaration.prix  | currency:'XOF' }} / kg</p>
                                     <button (click)="addToCart(declaration.id)" class="btn btn-outline-warning border border-warning rounded-pill px-3 text-success">
                                         <i class="fa fa-shopping-bag me-2 text-success"></i> Ajouter au panier
                                       </button>
@@ -182,7 +183,7 @@
                             </div>
                           </div>
 
-                          
+
                           <div class="col-12">
                               <div class="pagination d-flex justify-content-center mt-5">
                                   <a href="#" class="rounded">&laquo;</a>

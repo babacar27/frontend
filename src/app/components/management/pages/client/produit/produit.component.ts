@@ -39,7 +39,7 @@ export class ProduitComponent implements OnInit{
         icon: 'success',
         confirmButtonText: 'OK'
       });
-  
+
       // Optionnel : Rediriger vers une page de confirmation ou mettre à jour l'affichage
     }, error => {
       // Afficher une alerte SweetAlert2 en cas d'erreur
@@ -52,6 +52,6 @@ export class ProduitComponent implements OnInit{
       console.error('Erreur lors de la création de la commande', error);
     });
   }
-  
+
 
 }

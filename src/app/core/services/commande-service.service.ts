@@ -1,15 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environnement } from 'src/app/environnements/environnement';
-import { CommandeResponse } from '../models/Commande/commande-response.module';
+import { Commande, CommandeResponse } from '../models/Commande/commande-response.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommandeServiceService {
   private apiUrl = `${environnement.ApiUrl}/commandes`; // URL de base pour l'API
-  private apiUrlV = `${environnement.ApiUrl}/lignes-commandes`
+  private apiUrlV = `${environnement.ApiUrl}/lignes-commandes`;
+  private apiUrlPa = 'http://localhost:8000/api'; // Votre URL d'API
   constructor(private http:HttpClient) { }
 
    // Vérifier si l'utilisateur est authentifié (si un token est présent)
@@ -33,7 +34,7 @@ export class CommandeServiceService {
     const headers = this.getAuthHeaders();
     return this.http.post<CommandeResponse>(this.apiUrl, { declaration_id: declarationId }, { headers });
   }
-  
+
 
   // Obtenir les commandes d'un client
   getCommandes(): Observable<any> {
@@ -57,4 +58,36 @@ export class CommandeServiceService {
       body: { ligne_commande_id: ligneCommandeId }
     ,headers});
   }
+
+
+// Assuming you have a service like this
+createPaymentIntent(amount: number, clientEmail: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrlPa}/create-payment-intent`, { amount, clientEmail });
+}
+createCheckoutSession(totalAmount: number, email: string,name:string): Observable<any> {
+  const requestBody = {
+    totalAmount: totalAmount,
+    email: email,
+    name: name,
+  };
+  return this.http.post(`${this.apiUrlPa}/create-checkout-session`, requestBody);
+}
+
+
+// Ajoutez cette méthode à votre service CommandeServiceService
+getCommandeById(commandeId: number): Observable<any> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrl}/${commandeId}`, { headers })
+    .pipe(catchError(this.handleError));
+}
+  // Gérer les erreurs
+  private handleError(error: any): Observable<never> {
+    console.error('Une erreur s\'est produite:', error); // Log l'erreur
+    return throwError(error); // Rejette l'erreur pour qu'elle puisse être traitée ailleurs
+  }
+
+   // Dans le service CommandeServiceService
+
+
+
 }

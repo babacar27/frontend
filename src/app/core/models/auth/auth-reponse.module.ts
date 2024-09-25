@@ -21,6 +21,7 @@ export interface AuthResponse {
 export interface AuthResponse {
   id: number;
   name: string;
+  email: string;
   // Ajoute d'autres champs selon la réponse de ton API
 }
 

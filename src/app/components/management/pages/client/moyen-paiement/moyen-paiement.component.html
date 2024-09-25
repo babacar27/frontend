@@ -1,84 +1,94 @@
 <app-nav-bar-client></app-nav-bar-client>
 
-   <!-- Checkout Page Start -->
-   <div class="container-fluid py-5">
-    <div class="container py-5">
-      <div class="row g-5">
-        <!-- Colonne pour l'image -->
-        <div class="col-md-6 col-lg-7 d-flex justify-content-center align-items-center">
-          <img src="../assets/assets/vendors/images/paiement.png" alt="Image du produit" class="img-fluid" />
-        </div>
-        <!-- Colonne pour le tableau des détails de commande -->
-        <div class="col-md-6 col-lg-5">
-          <h1 class="mb-4">Détail de la Commande</h1>
-          <form action="#">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Produits</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let ligne of declarations">
-                    <th scope="row">
-                      <div class="d-flex align-items-center">
-                       <img [src]="ligne.declaration.produit.image ? 'http://127.0.0.1:8000' + ligne.declaration.produit.image : 'assets/images/default-image.jpg'"
-                          class="img-fluid rounded-circle"
-                          style="width: 60px; height: 60px;"
-                          alt="Big Banana">
-                      </div>
-                    </th>
-                    <td>{{ligne.declaration.produit.nom}}</td>
-                    <td>{{ligne.prixUnitaire}}XOF</td>
-                    <td>{{ligne.quantite}}</td>
-                    <td>{{ ligne.prixUnitaire * ligne.quantite }}XOF</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"></td>
-                    <td>Total</td>
-                    <td>{{ total }} XOF</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"></td>
-                    <td>Livraison</td>
-                    <td>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="Shipping-2" (change)="toggleFraisDeLivraison($event)" value="Shipping">
-                        <label class="form-check-label" for="Shipping-2">Forfait: 2000.00 XOF</label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"></td>
-                    <td>Total Général</td>
-                    <td>{{ getTotalGeneral() }} XOF</td>
-                  </tr>
-                </tbody>
-              </table>
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+  <div class="container py-5">
+    <div class="row g-5">
+      <!-- Colonne pour l'image -->
+      <div class="col-md-6 col-lg-7 d-flex justify-content-center align-items-center">
+        <img src="../assets/assets/vendors/images/paiement.png" alt="Image du produit" class="img-fluid" />
+      </div>
+      <!-- Colonne pour le tableau des détails de commande -->
+      <div class="col-md-6 col-lg-5">
+        <h1 class="mb-4">Détail de la Commande</h1>
+
+        <!-- Gestion des erreurs -->
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+        <!-- Formulaire de paiement -->
+        <form>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Produits</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Quantité(Kg)</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ligne of declarations">
+                  <th scope="row">
+                    <div class="d-flex align-items-center">
+                      <img [src]="ligne.declaration.produit.image ? 'http://127.0.0.1:8000' + ligne.declaration.produit.image : 'assets/images/default-image.jpg'"
+                        class="img-fluid rounded-circle"
+                        style="width: 60px; height: 60px;"
+                        alt="Produit">
+                    </div>
+                  </th>
+                  <td>{{ ligne.declaration.produit.nom }}</td>
+                  <td>{{ ligne.prixUnitaire }} XOF</td>
+                  <td>{{ ligne.quantite }}</td>
+                  <td>{{ ligne.prixUnitaire * ligne.quantite }} XOF</td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td>Total</td>
+                  <td>{{ total }} XOF</td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td>Livraison</td>
+                  <td>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="Shipping-2" (change)="toggleFraisDeLivraison($event)" value="Shipping">
+                      <label class="form-check-label" for="Shipping-2">Forfait: 2000.00 XOF</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3"></td>
+                  <td>Total Général</td>
+                  <td>{{ getTotalGeneral() }} XOF</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Choix du mode de paiement -->
+          <div class="form-group mb-3">
+            <label for="paymentMethod">Choisissez le mode de paiement :</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="carte" (change)="selectPaymentMethod($event)">
+              <label class="form-check-label" for="creditCard">Carte de Crédit/Débit (Stripe)</label>
             </div>
-            <h2>Mode De Paiement</h2>
-            <!-- Options de paiement -->
-            <div class="form-check my-3">
-              <input type="checkbox" class="form-check-input" id="Delivery-1" value="Delivery">
-              <label class="form-check-label" for="Delivery-1">En Espèces</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="espece" (change)="selectPaymentMethod($event)">
+              <label class="form-check-label" for="cash">Paiement en espèces</label>
             </div>
-            <div class="form-check my-3">
-              <input type="checkbox" class="form-check-input" id="Paypal-1" value="Paypal">
-              <label class="form-check-label" for="Paypal-1">Électronique</label>
-            </div>
-            <!-- Bouton de commande -->
-            <button type="button" class="btn btn-outline-success w-50 text-uppercase offset-7">Commander</button>
-          </form>
-        </div>
+          </div>
+
+          <!-- Bouton de paiement -->
+          <button type="button" class="btn btn-success text-light" [disabled]="!selectedPaymentMethod" (click)="processOrder()">Payer</button>
+        </form>
       </div>
     </div>
-
+  </div>
 </div>
+<input type="text" value="{{ commandeId }}">
 <!-- Checkout Page End -->
 
 <app-footer></app-footer>

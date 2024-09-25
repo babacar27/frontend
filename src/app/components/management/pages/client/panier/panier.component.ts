@@ -85,4 +85,9 @@ supprimerLigne(ligneCommandeId: number): void {
     }
   });
 }
+
+// Ajoutez cette méthode dans PanierComponent
+
+
+
 }
