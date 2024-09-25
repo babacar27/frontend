@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environnement } from 'src/app/environnements/environnement';
 import { Commande, CommandeResponse } from '../models/Commande/commande-response.module';
+import { Declaration } from '../models/declaration/declaration-reponse.module';
+import { LigneCommande } from '../models/LigneCommande/ligneCommande-response.module';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +90,56 @@ getCommandeById(commandeId: number): Observable<any> {
 
    // Dans le service CommandeServiceService
 
+ // Méthode pour récupérer les commandes validées d'un vendeur
+ getCommandesValideesParVendeur(): Observable<Commande[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Commande[]>(`${this.apiUrlPa}/commandes-par-vendeur`, { headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+}
 
+// Obtenir le total des commandes validées
+getTotalCommandesValidees(): Observable<CommandeResponse> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<CommandeResponse>(`${this.apiUrlPa}/total-commandes-validees`, { headers })
+    .pipe(catchError(this.handleError));
+}
+
+
+// Obtenir le total des annonces par vendeur
+getTotalAnnoncesParVendeur(): Observable<Declaration> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrlPa}/total-annonces-par-vendeur`, { headers })
+    .pipe(catchError(this.handleError));
+}
+
+// Obtenir le total des annonces par catégorie
+getTotalAnnoncesParCategorie(): Observable<Declaration[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrlPa}/total-annonces-par-categorie`, { headers })
+    .pipe(catchError(this.handleError));
+}
+
+// Obtenir le total des lignes de commandes par catégorie
+getTotalLignesCommandesParCategorie(): Observable<LigneCommande[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrlPa}/total-lignes-commandes-par-categorie`, { headers })
+    .pipe(catchError(this.handleError));
+}
+
+// Obtenir le total des commandes journalières
+getTotalCommandesJournalieres(): Observable<Commande[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrlPa}/total-commandes-journalieres`, { headers })
+    .pipe(catchError(this.handleError));
+}
+
+// Obtenir le montant total des commandes
+getMontantTotalCommandes(): Observable<CommandeResponse> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<any>(`${this.apiUrlPa}/montant-total-commandes`, { headers })
+    .pipe(catchError(this.handleError));
+}
 
 }

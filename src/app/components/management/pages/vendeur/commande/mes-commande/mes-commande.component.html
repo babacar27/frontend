@@ -2,99 +2,46 @@
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Mes commandes</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-      <li class="breadcrumb-item"><a href="#">Commandes</a></li>
-      <li class="breadcrumb-item active text-white">Mes commandes</li>
+    <li class="breadcrumb-item"><a href="#">Commandes</a></li>
+    <li class="breadcrumb-item active text-white">Mes commandes</li>
   </ol>
 </div>
 <div class="container-fluid py-5">
   <div class="container py-5">
-    <h1 >Etat des Commandes</h1>
-      <div class="table-responsive">
-
-          <table class="table mt-5">
-              <thead>
-                <tr>
-                  <th scope="col">Numero Commande</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Details</th>
-                  <th scope="col">Total Commande</th>
-                  <th scope="col">Adresse</th>
-                  <th scope="col">Statut</th>
-
-
-                </tr>
-              </thead>
-              <tbody>
-                  <tr>
-
-                      <td>
-                          <p class="mb-0 mt-4">109876789YTYUIUYTR</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">Baye Bara Diop</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">2</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">20000.00 XOF</p>
-                      </td>
-                      <td>
-                          <p class="mb-0 mt-4">Maristes</p>
-                      </td>
-                      <td>
-                        <!-- Bouton pour le statut "Publier" -->
-                        <button
-                          class="btn btn-sm btn-success "
-                        >
-                          Expédié
-                        </button>
-
-                        <!-- Bouton pour le statut "Archiver" -->
-
-                      </td>
-
-
-
-
-                  </tr>
-                  <tr>
-
-                    <td>
-                        <p class="mb-0 mt-4">25355677HSHHDKKDK</p>
-                    </td>
-                    <td>
-                        <p class="mb-0 mt-4">Abdoulaye Lo</p>
-                    </td>
-                    <td>
-                        <p class="mb-0 mt-4">3</p>
-                    </td>
-                    <td>
-                        <p class="mb-0 mt-4">40000.00 XOF</p>
-                    </td>
-                    <td>
-                        <p class="mb-0 mt-4">Mbao</p>
-                    </td>
-                    <td>
-                      <!-- Bouton pour le statut "Publier" -->
-                      <button
-                        class="btn btn-sm btn-info "
-                      >
-                        Marquer comme expédié
-                      </button>
-
-                      <!-- Bouton pour le statut "Archiver" -->
-
-                    </td>
-
-
-
-
-                </tr>
-              </tbody>
-          </table>
-      </div>
-
-
+    <h1>Etat des Commandes</h1>
+    <div class="table-responsive">
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Numero Commande</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Details</th>
+            <th scope="col">Total Commande</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let commande of commandes">
+            <td>{{ commande.numero_commande }}</td>
+            <td>{{ commande.client.name }}</td>
+            <td>{{ commande.client.telephone }}</td>
+            <td>{{ commande.montant_total }} XOF</td>
+            <td>{{ commande.client.adresse }}</td>
+            <td>
+              <!-- Bouton "Expédié" visible uniquement si la commande est marquée comme expédiée -->
+              <button class="btn btn-sm btn-success" *ngIf="estExpedie(commande.id)">
+                Expédié
+              </button>
+              
+              <!-- Bouton "Marquer comme expédié" masqué une fois que la commande est expédiée -->
+              <button class="btn btn-sm btn-info" *ngIf="!estExpedie(commande.id)" (click)="marquerCommeExpedie(commande.id)">
+                Marquer comme expédié
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
